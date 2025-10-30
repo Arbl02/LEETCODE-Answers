@@ -22,5 +22,5 @@ class Solution {
 
         return k; // 'k' is the new length.
     }
-}
+};
 # @lc code=end
