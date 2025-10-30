@@ -1,0 +1,41 @@
+# @lc app=leetcode id=102 lang=python
+# 
+# [9] Palindrome Number
+# 
+# @lc code=start
+class Solution {
+public:
+    /**
+     * Determines if an integer is a palindrome.
+     * x The integer to check.
+     * return bool True if 'x' is a palindrome, false otherwise.
+     * "Given an integer x, return true if x is a palindrome, and false otherwise."
+     */
+    bool isPalindrome(int x) {
+        // 1. Handle edge cases:
+        // - Negative numbers are not palindromes.
+        // - Numbers ending in 0 (except 0 itself) cannot be palindromes (e.g., 120, 10).
+        if(x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        // 'revertedNumber' stores the reversed second half of 'x'.
+        int revertedNumber = 0;
+        
+        // 2. Iteratively reverse the second half of 'x'.
+        // The loop stops when 'x' becomes smaller than or equal to 'revertedNumber'.
+        while(x > revertedNumber){
+            // Append the last digit of x to revertedNumber.
+            revertedNumber = revertedNumber * 10 + x % 10;
+            // Remove the last digit from x.
+            x /= 10;
+        }
+        
+        // 3. Final comparison:
+        // - Even digit count (e.g., 1221): x (12) must equal revertedNumber (12).
+        // - Odd digit count (e.g., 121): The middle digit is ignored by dividing revertedNumber by 10
+        //   (x=1, revertedNumber=12, so x == revertedNumber/10 is 1 == 1).
+        return x == revertedNumber || x == revertedNumber / 10;
+    }
+};
+# @lc code=end
